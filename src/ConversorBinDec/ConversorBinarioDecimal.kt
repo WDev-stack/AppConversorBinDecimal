@@ -1,17 +1,21 @@
 fun main (args: Array<String>) {
 
-    println("Digite o número binário que será convertido em decimal: ")
-    var numeroBinario: Long = readlnOrNull()?.toLong() ?: 0
+    var numeroBinario: Long
 
-    while (numeroBinario.toInt() <= 0) {
-        println("Digite um valor válido: ")
-        numeroBinario = readlnOrNull()?.toLongOrNull() ?: 0
-    }
+    do {
+        println("Digite o número binário que será convertido em decimal: ")
+        numeroBinario = readlnOrNull()?.toLongOrNull() ?: -1
+
+        if (numeroBinario <= 0) {
+            println("Erro: Esse número não corresponde a um número Binário!")
+        }
+
+    } while (numeroBinario.toInt() <= 0)
+
     var numeroDecimal: Int = 0
     numeroDecimal = conversorBinarioDecimal(numeroBinario)
 
     println("Número binário $numeroBinario = $numeroDecimal")
-
 }
 
 fun conversorBinarioDecimal (numeroBinario: Long):Int {
@@ -26,8 +30,7 @@ fun conversorBinarioDecimal (numeroBinario: Long):Int {
         numeroTemporario = numeroBinario % 10
         numeroBinario /= 10
         numeroDecimal += (numeroTemporario * Math.pow(2.0,i.toDouble())).toInt()
-        ++i
-
+        i++
     }
 
     return numeroDecimal
